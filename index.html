@@ -1,173 +1,722 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marriage Biodata</title>
-  <meta name="description" content="Marriage Biodata - Rajesh Kumar Sharma" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.462.0/lucide.min.css" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marriage Biodata – Priya Sharma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a96e;
+    --gold-light: #e8d5a3;
+    --rose: #d4868a;
+    --ivory: #fdf8f0;
+    --cream: #f5ede0;
+    --dark: #2c1810;
+    --mid: #6b3d2e;
+    --text: #3d2314;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ivory);
+    font-family: 'Josefin Sans', sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* Decorative border */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 12px;
+    border: 1px solid var(--gold-light);
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 60% 40%, #f7e8d5 0%, var(--ivory) 70%);
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, var(--gold-light) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.3;
+  }
+
+  .hero-ornament {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    color: var(--gold);
+    opacity: 0.15;
+    position: absolute;
+    top: 20px;
+    line-height: 1;
+    letter-spacing: 0.5em;
+    animation: fadeIn 2s ease forwards;
+  }
+
+  .hero-badge {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: slideUp 1s ease 0.2s both;
+  }
+
+  .photo-frame {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    padding: 6px;
+    background: white;
+    box-shadow: 0 20px 60px rgba(201,169,110,0.3);
+    animation: slideUp 1s ease 0.4s both;
+    position: relative;
+  }
+
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-light);
+  }
+
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 300;
+    color: var(--dark);
+    margin-top: 24px;
+    animation: slideUp 1s ease 0.6s both;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-tagline {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    color: var(--rose);
+    margin-top: 8px;
+    animation: slideUp 1s ease 0.8s both;
+    text-transform: uppercase;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    animation: fadeIn 2s ease 1.5s both;
+    cursor: pointer;
+  }
+
+  .scroll-cue span {
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .scroll-arrow {
+    width: 1px;
+    height: 30px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: pulse 2s ease infinite;
+  }
+
+  /* Nav tabs */
+  .nav-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(253,248,240,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gold-light);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 20px;
+  }
+
+  .nav-tab {
+    padding: 16px 24px;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--mid);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .nav-tab:hover, .nav-tab.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* Sections */
+  .section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 70px 30px;
+    display: none;
+  }
+
+  .section.active { display: block; animation: fadeIn 0.5s ease; }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .divider-line { flex: 1; height: 1px; background: var(--gold-light); }
+  .divider-diamond {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  /* Info cards */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .info-card {
+    background: white;
+    border: 1px solid var(--gold-light);
+    padding: 20px 24px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .info-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.4s ease;
+  }
+
+  .info-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(201,169,110,0.15); }
+  .info-card:hover::after { width: 100%; }
+
+  .info-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .info-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--dark);
+  }
+
+  /* About prose */
+  .about-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    line-height: 2;
+    color: var(--mid);
+    font-style: italic;
+    border-left: 3px solid var(--gold);
+    padding-left: 24px;
+    margin-bottom: 30px;
+  }
+
+  .trait-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .trait-pill {
+    padding: 6px 18px;
+    border: 1px solid var(--gold);
+    color: var(--mid);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .trait-pill:hover { background: var(--gold); color: white; }
+
+  /* Gallery */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 12px;
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: var(--cream);
+  }
+
+  .gallery-item:first-child { grid-row: 1 / 3; }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    display: block;
+    min-height: 180px;
+  }
+
+  .gallery-item:hover img { transform: scale(1.05); }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(44,24,16,0.7) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+  }
+
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  .gallery-caption {
+    color: white;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox img {
+    max-width: 80vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border: 1px solid var(--gold-light);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 30px; right: 40px;
+    color: var(--gold-light);
+    font-size: 2rem;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    transition: color 0.3s;
+  }
+
+  .lightbox-close:hover { color: white; }
+
+  /* Family & Partner sections */
+  .family-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .family-block {
+    background: white;
+    border: 1px solid var(--gold-light);
+    padding: 24px;
+  }
+
+  .family-block-title {
+    font-size: 0.55rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--gold-light);
+  }
+
+  .family-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0e8d8;
+    font-size: 0.75rem;
+  }
+
+  .family-row:last-child { border-bottom: none; }
+  .family-row .label { color: var(--mid); letter-spacing: 0.1em; }
+  .family-row .value { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--dark); }
+
+  /* Partner expectations */
+  .expect-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f0e8d8;
+    align-items: flex-start;
+  }
+
+  .expect-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--gold-light);
+    line-height: 1;
+    min-width: 40px;
+    font-style: italic;
+  }
+
+  .expect-text { font-size: 0.75rem; line-height: 1.8; color: var(--mid); }
+  .expect-title { font-size: 0.9rem; color: var(--dark); font-weight: 400; margin-bottom: 4px; letter-spacing: 0.05em; }
+
+  /* Contact */
+  .contact-center {
+    text-align: center;
+    padding: 40px 0;
+  }
+
+  .contact-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--mid);
+    margin-bottom: 40px;
+  }
+
+  .contact-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .contact-card {
+    background: white;
+    border: 1px solid var(--gold-light);
+    padding: 24px 32px;
+    text-align: center;
+    min-width: 180px;
+    transition: all 0.3s;
+  }
+
+  .contact-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(201,169,110,0.2); }
+
+  .contact-icon { font-size: 1.5rem; margin-bottom: 8px; }
+  .contact-type { font-size: 0.5rem; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+  .contact-val { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--dark); }
+
+  .cta-btn {
+    display: inline-block;
+    padding: 14px 40px;
+    border: 1px solid var(--gold);
+    color: var(--dark);
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: transparent;
+    text-decoration: none;
+  }
+
+  .cta-btn:hover { background: var(--gold); color: white; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid var(--gold-light);
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* Animations */
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  @media (max-width: 600px) {
+    .info-grid, .family-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item:first-child { grid-row: auto; }
+    .nav-tab { padding: 14px 12px; font-size: 0.5rem; }
+  }
+</style>
 </head>
 <body>
-  <div class="page">
-    <div class="container" id="biodata-content">
-      <!-- Header -->
-      <div class="header">
-        <div class="divider-icon">
-          <div class="divider-line"></div>
-          <svg class="icon-heart" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          <div class="divider-line"></div>
-        </div>
-        <h1>Marriage Biodata</h1>
-        <p class="subtitle">श्री गणेशाय नमः</p>
-        <button class="btn-download" id="downloadBtn" onclick="downloadPDF()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span id="downloadText">Download PDF</span>
-        </button>
-      </div>
 
-      <!-- Main Card -->
-      <div class="card">
-        <!-- Profile Section -->
-        <div class="profile-section">
-          <div class="profile-photo">
-            <img src="assets/profile-photo.jpg" alt="Profile Photo" />
-          </div>
-          <h2 class="profile-name">Rajesh Kumar Sharma</h2>
-          <p class="profile-subtitle">Software Engineer • Mumbai</p>
-        </div>
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-ornament">✦ ✦ ✦</div>
+  <div class="hero-badge">Marriage Biodata · 2024</div>
+  <div class="photo-frame">
+    <img src="https://i.pravatar.cc/300?img=47" alt="Profile Photo">
+  </div>
+  <h1 class="hero-name">Priya Sharma</h1>
+  <p class="hero-tagline">Software Engineer · Mumbai · Born 1997</p>
+  <div class="scroll-cue" onclick="document.querySelector('.nav-tabs').scrollIntoView({behavior:'smooth'})">
+    <span>Explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
 
-        <div class="card-body">
-          <!-- Personal Details -->
-          <div class="section">
-            <div class="section-title">
-              <div class="section-line"></div>
-              <h3>Personal Details</h3>
-              <div class="section-line"></div>
-            </div>
-            <div class="detail-box">
-              <div class="detail-row"><span class="label">Date of Birth</span><span class="value">15 March 1996</span></div>
-              <div class="detail-row"><span class="label">Age</span><span class="value">28 Years</span></div>
-              <div class="detail-row"><span class="label">Height</span><span class="value">5' 10"</span></div>
-              <div class="detail-row"><span class="label">Weight</span><span class="value">72 Kg</span></div>
-              <div class="detail-row"><span class="label">Complexion</span><span class="value">Fair</span></div>
-              <div class="detail-row"><span class="label">Religion</span><span class="value">Hindu</span></div>
-              <div class="detail-row"><span class="label">Caste</span><span class="value">Brahmin</span></div>
-              <div class="detail-row"><span class="label">Mother Tongue</span><span class="value">Hindi</span></div>
-              <div class="detail-row last"><span class="label">Marital Status</span><span class="value">Unmarried</span></div>
-            </div>
-          </div>
+<!-- Navigation -->
+<nav class="nav-tabs">
+  <div class="nav-tab active" onclick="showTab('personal')">Personal</div>
+  <div class="nav-tab" onclick="showTab('about')">About Me</div>
+  <div class="nav-tab" onclick="showTab('gallery')">Gallery</div>
+  <div class="nav-tab" onclick="showTab('family')">Family</div>
+  <div class="nav-tab" onclick="showTab('partner')">Partner</div>
+  <div class="nav-tab" onclick="showTab('contact')">Contact</div>
+</nav>
 
-          <!-- Education & Career -->
-          <div class="section">
-            <div class="section-title">
-              <div class="section-line"></div>
-              <h3>Education & Career</h3>
-              <div class="section-line"></div>
-            </div>
-            <div class="detail-box">
-              <div class="detail-row"><span class="label">Education</span><span class="value">B.Tech (Computer Science)</span></div>
-              <div class="detail-row"><span class="label">Occupation</span><span class="value">Software Engineer</span></div>
-              <div class="detail-row"><span class="label">Company</span><span class="value">TCS Ltd.</span></div>
-              <div class="detail-row last"><span class="label">Annual Income</span><span class="value">₹8,00,000</span></div>
-            </div>
-          </div>
+<!-- Personal -->
+<section id="personal" class="section active">
+  <h2 class="section-title">Personal Details</h2>
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  <div class="info-grid">
+    <div class="info-card"><div class="info-label">Full Name</div><div class="info-value">Priya Ramesh Sharma</div></div>
+    <div class="info-card"><div class="info-label">Date of Birth</div><div class="info-value">14th March, 1997</div></div>
+    <div class="info-card"><div class="info-label">Time of Birth</div><div class="info-value">6:45 AM (IST)</div></div>
+    <div class="info-card"><div class="info-label">Place of Birth</div><div class="info-value">Mumbai, Maharashtra</div></div>
+    <div class="info-card"><div class="info-label">Height</div><div class="info-value">5 feet 4 inches</div></div>
+    <div class="info-card"><div class="info-label">Complexion</div><div class="info-value">Fair</div></div>
+    <div class="info-card"><div class="info-label">Blood Group</div><div class="info-value">O Positive</div></div>
+    <div class="info-card"><div class="info-label">Religion & Caste</div><div class="info-value">Hindu · Brahmin</div></div>
+    <div class="info-card"><div class="info-label">Gotra</div><div class="info-value">Kashyap</div></div>
+    <div class="info-card"><div class="info-label">Manglik</div><div class="info-value">Non-Manglik</div></div>
+    <div class="info-card"><div class="info-label">Education</div><div class="info-value">B.Tech Computer Science, IIT Bombay</div></div>
+    <div class="info-card"><div class="info-label">Occupation</div><div class="info-value">Senior Software Engineer, TCS</div></div>
+    <div class="info-card"><div class="info-label">Annual Income</div><div class="info-value">₹ 18 LPA</div></div>
+    <div class="info-card"><div class="info-label">Current Location</div><div class="info-value">Andheri West, Mumbai</div></div>
+  </div>
+</section>
 
-          <!-- Family Details -->
-          <div class="section">
-            <div class="section-title">
-              <div class="section-line"></div>
-              <h3>Family Details</h3>
-              <div class="section-line"></div>
-            </div>
-            <div class="detail-box">
-              <div class="detail-row"><span class="label">Father's Name</span><span class="value">Shri Mahesh Sharma</span></div>
-              <div class="detail-row"><span class="label">Father's Occupation</span><span class="value">Retired Government Officer</span></div>
-              <div class="detail-row"><span class="label">Mother's Name</span><span class="value">Smt. Sunita Sharma</span></div>
-              <div class="detail-row"><span class="label">Mother's Occupation</span><span class="value">Homemaker</span></div>
-              <div class="detail-row"><span class="label">Siblings</span><span class="value">1 Elder Sister (Married)</span></div>
-              <div class="detail-row last"><span class="label">Family Type</span><span class="value">Nuclear</span></div>
-            </div>
-          </div>
-
-          <!-- Photo Gallery -->
-          <div class="section">
-            <div class="section-title">
-              <div class="section-line"></div>
-              <h3>Photo Gallery</h3>
-              <div class="section-line"></div>
-            </div>
-            <div class="gallery-grid">
-              <button class="gallery-item" onclick="openLightbox(0)">
-                <img src="assets/gallery-1.jpg" alt="Family Photo" />
-              </button>
-              <button class="gallery-item" onclick="openLightbox(1)">
-                <img src="assets/gallery-2.jpg" alt="Casual Photo" />
-              </button>
-              <button class="gallery-item" onclick="openLightbox(2)">
-                <img src="assets/gallery-3.jpg" alt="Graduation" />
-              </button>
-              <button class="gallery-item" onclick="openLightbox(3)">
-                <img src="assets/gallery-4.jpg" alt="Travel" />
-              </button>
-            </div>
-          </div>
-
-          <!-- Contact Details -->
-          <div class="section">
-            <div class="section-title">
-              <div class="section-line"></div>
-              <h3>Contact Details</h3>
-              <div class="section-line"></div>
-            </div>
-            <div class="detail-box contact-box">
-              <div class="contact-row">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                <span class="label">Phone:</span>
-                <span class="value">+91 98765 43210</span>
-              </div>
-              <div class="contact-row">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <span class="label">Email:</span>
-                <span class="value">rajesh.sharma@email.com</span>
-              </div>
-              <div class="contact-row">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span class="label">Address:</span>
-                <span class="value">Andheri West, Mumbai, Maharashtra</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="card-footer">
-          <div class="divider-icon small">
-            <div class="divider-line faded"></div>
-            <svg class="icon-heart small" viewBox="0 0 24 24" fill="currentColor" stroke="none" opacity="0.4"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            <div class="divider-line faded"></div>
-          </div>
-        </div>
-      </div>
-
-      <p class="footer-text">Created with ❤️ for a beautiful beginning</p>
+<!-- About -->
+<section id="about" class="section">
+  <h2 class="section-title">About Me</h2>
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  <p class="about-text">
+    I am a warm-hearted, independent woman who values family above everything else. I believe in building a life together — one rooted in mutual respect, laughter, and shared dreams. I enjoy the quiet joy of Sunday mornings with a good book as much as a spontaneous road trip.
+  </p>
+  <p class="about-text">
+    My work in technology gives me purpose and drive, but I am equally passionate about cooking traditional Maharashtrian recipes, practicing classical Bharatnatyam, and volunteering at a local school on weekends.
+  </p>
+  <h3 style="font-size:0.55rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;">Personality Traits</h3>
+  <div class="trait-pills">
+    <span class="trait-pill">Empathetic</span>
+    <span class="trait-pill">Curious</span>
+    <span class="trait-pill">Family-Oriented</span>
+    <span class="trait-pill">Ambitious</span>
+    <span class="trait-pill">Creative</span>
+    <span class="trait-pill">Grounded</span>
+    <span class="trait-pill">Adventurous</span>
+    <span class="trait-pill">Kind</span>
+  </div>
+  <div style="margin-top:40px;">
+    <h3 style="font-size:0.55rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;">Hobbies & Interests</h3>
+    <div class="info-grid">
+      <div class="info-card"><div class="info-label">Dance</div><div class="info-value">Classical Bharatnatyam – 12 years</div></div>
+      <div class="info-card"><div class="info-label">Reading</div><div class="info-value">Fiction, History & Self-help</div></div>
+      <div class="info-card"><div class="info-label">Cooking</div><div class="info-value">Traditional & Continental Cuisine</div></div>
+      <div class="info-card"><div class="info-label">Travel</div><div class="info-value">Explored 11 states across India</div></div>
     </div>
   </div>
+</section>
 
-  <!-- Lightbox Modal -->
-  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
-    <div class="lightbox-content">
-      <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
-      <img id="lightbox-img" src="" alt="Gallery Photo" />
+<!-- Gallery -->
+<section id="gallery" class="section">
+  <h2 class="section-title">Photo Gallery</h2>
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openLightbox('https://i.pravatar.cc/600?img=47')">
+      <img src="https://i.pravatar.cc/600?img=47" alt="Formal Portrait">
+      <div class="gallery-overlay"><div class="gallery-caption">Formal Portrait</div></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://i.pravatar.cc/400?img=48')">
+      <img src="https://i.pravatar.cc/400?img=48" alt="Casual">
+      <div class="gallery-overlay"><div class="gallery-caption">Casual</div></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://i.pravatar.cc/400?img=49')">
+      <img src="https://i.pravatar.cc/400?img=49" alt="Traditional Attire">
+      <div class="gallery-overlay"><div class="gallery-caption">Traditional</div></div>
     </div>
   </div>
+  <p style="font-size:0.55rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-top:20px;text-align:center;">Click any photo to enlarge · More photos available on request</p>
+</section>
 
-  <!-- CDN Libraries for PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="script.js"></script>
+<!-- Family -->
+<section id="family" class="section">
+  <h2 class="section-title">Family Details</h2>
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  <div class="family-grid">
+    <div class="family-block">
+      <div class="family-block-title">Father's Side</div>
+      <div class="family-row"><span class="label">Father</span><span class="value">Ramesh Sharma (Retired IAS)</span></div>
+      <div class="family-row"><span class="label">Mother</span><span class="value">Sunita Sharma (Homemaker)</span></div>
+      <div class="family-row"><span class="label">Native Place</span><span class="value">Nashik, Maharashtra</span></div>
+      <div class="family-row"><span class="label">Family Type</span><span class="value">Nuclear</span></div>
+      <div class="family-row"><span class="label">Values</span><span class="value">Traditional with Modern Outlook</span></div>
+    </div>
+    <div class="family-block">
+      <div class="family-block-title">Siblings</div>
+      <div class="family-row"><span class="label">Brother</span><span class="value">Rahul Sharma (30) – CA</span></div>
+      <div class="family-row"><span class="label">Status</span><span class="value">Married</span></div>
+      <div class="family-row"><span class="label">Location</span><span class="value">Pune, Maharashtra</span></div>
+      <div class="family-row"><span class="label">Sister</span><span class="value">None</span></div>
+      <div class="family-row"><span class="label">Family Status</span><span class="value">Upper Middle Class</span></div>
+    </div>
+    <div class="family-block" style="grid-column: 1 / -1;">
+      <div class="family-block-title">Maternal Side</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;">
+        <div class="family-row"><span class="label">Maternal grandfather</span><span class="value">Late Shri G. Joshi</span></div>
+        <div class="family-row"><span class="label">Maternal grandmother</span><span class="value">Smt. Kamala Joshi</span></div>
+        <div class="family-row"><span class="label">Maternal Uncle</span><span class="value">Dr. Anil Joshi, Pune</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Partner Expectations -->
+<section id="partner" class="section">
+  <h2 class="section-title">Partner Expectations</h2>
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  <div class="expect-item">
+    <div class="expect-num">01</div>
+    <div class="expect-text"><div class="expect-title">Age & Education</div>Between 27–33 years, well-educated with a professional degree (Engineering, Medicine, CA, or MBA preferred).</div>
+  </div>
+  <div class="expect-item">
+    <div class="expect-num">02</div>
+    <div class="expect-text"><div class="expect-title">Values & Character</div>Respects family, values relationships, and approaches life with honesty, kindness, and emotional maturity.</div>
+  </div>
+  <div class="expect-item">
+    <div class="expect-num">03</div>
+    <div class="expect-text"><div class="expect-title">Location & Lifestyle</div>Open to residing in Mumbai or Pune. Comfortable with a working partner who balances career and family equally.</div>
+  </div>
+  <div class="expect-item">
+    <div class="expect-num">04</div>
+    <div class="expect-text"><div class="expect-title">Religion & Caste</div>Hindu preferred; caste no bar for the right match. Manglik or non-Manglik both welcome.</div>
+  </div>
+  <div class="expect-item">
+    <div class="expect-num">05</div>
+    <div class="expect-text"><div class="expect-title">Outlook</div>Someone who believes in growing together — in love, wisdom, and adventure. A partner, not just a companion.</div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section">
+  <h2 class="section-title">Get In Touch</h2>
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  <div class="contact-center">
+    <p class="contact-intro">"The best love is the kind that awakens the soul<br>and makes us reach for more."</p>
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <div class="contact-type">Phone</div>
+        <div class="contact-val">+91 98765 43210</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-type">Email</div>
+        <div class="contact-val">priya.sharma@email.com</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <div class="contact-type">Location</div>
+        <div class="contact-val">Andheri West, Mumbai</div>
+      </div>
+    </div>
+    <p style="font-size:0.6rem;letter-spacing:0.2em;color:var(--mid);margin-bottom:24px;">Kindly contact between 6 PM – 9 PM IST on weekdays.</p>
+    <a class="cta-btn" href="mailto:priya.sharma@email.com">Send a Message</a>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">✕</span>
+  <img id="lightbox-img" src="" alt="Photo">
+</div>
+
+<!-- Footer -->
+<footer>
+  ✦ &nbsp; Priya Sharma · Marriage Biodata · 2024 &nbsp; ✦
+</footer>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const tabs = ['personal','about','gallery','family','partner','contact'];
+    document.querySelectorAll('.nav-tab')[tabs.indexOf(id)].classList.add('active');
+    document.querySelector('.nav-tabs').scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+</script>
 </body>
 </html>
